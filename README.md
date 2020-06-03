@@ -3,7 +3,7 @@
 </h1> 
 
 <p align="center">
-  Learn how NodeJS and Express can interact with PostgreSQL.
+  Learn how React and Express (NodeJS) can interact with PostgreSQL
 </p> 
 
 ## ✅ Features
