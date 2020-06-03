@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 function App() {
-	const [merchants, setMerchants] = useState(false);
+	const [merchants, setMerchants] = useState(null);
 	useEffect(() => {
-		getMerchant();
+		getMerchants();
 	}, []);
-	function getMerchant() {
+	function getMerchants() {
 		fetch("http://localhost:3001")
-			.then(response => {
+			.then((response) => {
 				return response.json();
-				// return response.text();
 			})
-			.then(data => {
+			.then((data) => {
 				setMerchants(data);
 			});
 	}
@@ -24,14 +23,12 @@ function App() {
 			},
 			body: JSON.stringify({ name, email }),
 		})
-			.then(response => {
-				// return response.json();
+			.then((response) => {
 				return response.text();
 			})
-			.then(data => {
-				console.log(data);
+			.then((data) => {
 				alert(data);
-				getMerchant();
+				getMerchants();
 			});
 	}
 	function deleteMerchant() {
@@ -39,31 +36,31 @@ function App() {
 		fetch(`http://localhost:3001/merchants/${id}`, {
 			method: "DELETE",
 		})
-			.then(response => {
+			.then((response) => {
 				return response.text();
 			})
-			.then(data => {
+			.then((data) => {
 				alert(data);
-				getMerchant();
+				getMerchants();
 			});
 	}
 	return (
 		<div>
 			<ul>
 				{merchants ? (
-					merchants.map(merchant => (
+					merchants.map((merchant) => (
 						<li key={merchant.id.toString()}>
-							{merchant.name} - {merchant.email}
+							({merchant.id}) - {merchant.name} - {merchant.email}
 						</li>
 					))
 				) : (
-					<li>There is no merchant data available</li>
+					<li>Não há dados do comerciantes disponíveis</li>
 				)}
 			</ul>
 			<br />
-			<button onClick={createMerchant}>Add merchant</button>
+			<button onClick={createMerchant}>Adicionar Comerciante</button>
 			<br />
-			<button onClick={deleteMerchant}>Delete merchant</button>
+			<button onClick={deleteMerchant}>Excluir Comerciante</button>
 		</div>
 	);
 }
